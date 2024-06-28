@@ -433,11 +433,11 @@ typedef uLong FAR uLongf;
    typedef unsigned long z_crc_t;
 #endif
 
-#if 1    /* was set to #if 1 by ./configure */
+#ifdef HAVE_UNISTD_H    /* may be set to #if 1 by ./configure */
 #  define Z_HAVE_UNISTD_H
 #endif
 
-#if 1    /* was set to #if 1 by ./configure */
+#ifdef HAVE_STDARG_H    /* may be set to #if 1 by ./configure */
 #  define Z_HAVE_STDARG_H
 #endif
 
@@ -511,6 +511,8 @@ typedef uLong FAR uLongf;
 
 #if !defined(_WIN32) && defined(Z_LARGE64)
 #  define z_off64_t off64_t
+#elif defined(__MINGW32__)
+#  define z_off64_t long long
 #elif defined(_WIN32) && !defined(__GNUC__)
 #  define z_off64_t __int64
 #elif defined(__GO32__)
